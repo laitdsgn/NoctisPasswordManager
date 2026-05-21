@@ -9,7 +9,7 @@
     android:background="#E7E7E7"
     tools:context=".MainActivity">
 
-    <!-- 1. FIXED TOOLBAR AT THE TOP -->
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- 2. SCROLLABLE CONTENT AREA BELOW THE TOOLBAR -->
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Single parent container for your login form fields -->
+
 
         <FrameLayout
             android:layout_width="match_parent"
