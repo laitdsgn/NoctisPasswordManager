@@ -1,0 +1,62 @@
+@startuml
+
+skinparam backgroundColor #FFFFFF
+skinparam classBackgroundColor #E8F4F8
+skinparam classBorderColor #2C3E50
+skinparam classFontSize 12
+skinparam classFontStyle bold
+
+title Password Manager - Database Schema (Bitwarden Style)
+
+class Users {
+  + _id : ObjectId <<PK>>
+  --
+  email : String
+  username : String
+  createdAt : Date
+  lastLogin : Date
+}
+
+class MasterKeys {
+  + _id : ObjectId <<PK>>
+  --
+  userId : ObjectId <<FK>>
+  masterPasswordHash : String
+  createdAt : Date
+  lastChanged : Date
+}
+
+class PasswordEntries {
+  + _id : ObjectId <<PK>>
+  --
+  userId : ObjectId <<FK>>
+  serviceName : String
+  username : String
+  url : String
+  encryptedPassword : String
+  category : String
+  notes : String
+  compromised : Boolean
+  createdAt : Date
+  lastModified : Date
+  lastUsed : Date
+}
+
+Users "1" -- "1" MasterKeys : has >
+Users "1" -- "0..*" PasswordEntries : owns >
+
+note right of MasterKeys
+  **Master Password (like Bitwarden):**
+  - Hash używany do weryfikacji logowania
+  - Master Password NIGDY nie jest zapisywany jest w pamieci urzadzenia
+  - Używany do szyfrowania/odszyfrowywania haseł
+  - Bez Master Password nie odszyfrujemy żadnych haseł
+end note
+
+note right of PasswordEntries
+  **Encrypted Passwords:**
+  - Hasło zaszyfrowane używając Master Password
+  - Każde hasło szyfrowane osobno
+end note
+
+@enduml

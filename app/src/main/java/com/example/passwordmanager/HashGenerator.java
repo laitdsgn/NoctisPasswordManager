@@ -23,4 +23,5 @@ public class HashGenerator {
        String stringFinalHash = Base64.encodeToString(hash, Base64.NO_WRAP);
        return stringFinalHash;
     }
+
 }
